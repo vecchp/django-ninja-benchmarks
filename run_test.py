@@ -5,12 +5,12 @@ import time
 
 CONCURRENT_FRAMEWORKS = [
     # 'flask_marshmallow_uwsgi',
-    "drf_uwsgi",
-    'drf_gunicorn_gevent',
-    'ninja_uwsgi',
-    'ninja_gunicorn',
+    # "drf_uwsgi",
+    # 'drf_gunicorn_gevent',
+    # 'ninja_uwsgi',
+    # 'ninja_gunicorn',
     'ninja_gunicorn_gevent',
-    'ninja_uvicorn',
+    # 'ninja_uvicorn',
     # 'fastapi_gunicorn',
     # 'fastapi_uvicorn'
 ]
@@ -22,12 +22,12 @@ class FrameworkService:
         self.workers = workers
 
     def __enter__(self):
-        os.system(f'WORKERS={self.workers} docker-compose up -d network_service')
-        os.system(f'WORKERS={self.workers} docker-compose up -d {self.name}')
+        os.system(f'WORKERS={self.workers} docker compose up -d network_service')
+        os.system(f'WORKERS={self.workers} docker compose up -d {self.name}')
         time.sleep(5)
 
     def __exit__(self, *a, **kw):
-        os.system(f'WORKERS={self.workers} docker-compose down')
+        os.system(f'WORKERS={self.workers} docker compose down')
 
 
 def benchmark(url, concurency, count, payload=None):
@@ -68,8 +68,8 @@ def test_concurrent(name):
 
 
 def main():
-    os.system(f'docker-compose build')
-    os.system(f'docker-compose down')
+    os.system(f'docker compose build')
+    os.system(f'docker compose down')
 
     results = {}
     for framework in CONCURRENT_FRAMEWORKS:

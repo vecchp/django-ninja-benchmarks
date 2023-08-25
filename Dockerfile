@@ -2,6 +2,8 @@ FROM python:3.11
 
 ENV PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=on
 
+# Need Rust toolchain
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 

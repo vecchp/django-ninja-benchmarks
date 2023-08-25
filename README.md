@@ -3,7 +3,7 @@
 ### Requirements
 
  - Python3
- - Docker + docker-compose
+ - Docker + docker compose
  - ab 
 
 ###
