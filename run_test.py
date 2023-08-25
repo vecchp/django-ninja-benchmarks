@@ -5,12 +5,12 @@ import time
 
 CONCURRENT_FRAMEWORKS = [
     # 'flask_marshmallow_uwsgi',
-    # "drf_uwsgi",
-    # 'drf_gunicorn_gevent',
-    # 'ninja_uwsgi',
-    # 'ninja_gunicorn',
+    "drf_gunicorn",
+    'drf_gunicorn_gevent',
+    'ninja_gunicorn',
     'ninja_gunicorn_gevent',
-    # 'ninja_uvicorn',
+    'ninja_gunicorn_uvcorn',
+    'ninja_uvicorn',
     # 'fastapi_gunicorn',
     # 'fastapi_uvicorn'
 ]

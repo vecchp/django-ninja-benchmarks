@@ -10,40 +10,40 @@ x-common: &common
 # see the run_test.py for details
 
 services:
-  flask_marshmallow_uwsgi:
+  flask_marshmallow_gunicorn:
     <<: *common
     working_dir: /app_flask_marshmallow
-    command: uwsgi --http 0.0.0.0:8000 --module main:app --workers ${WORKERS}
+    command: gunicorn main:app --bind 0.0.0.0:8000 --workers ${WORKERS}
   
-  drf_uwsgi:
+  drf_gunicorn:
     <<: *common
     working_dir: /app_drf
-    command: uwsgi --http 0.0.0.0:8000 --module drf.wsgi:application --workers ${WORKERS}
+    command: gunicorn drf.wsgi:application --bind 0.0.0.0:8000 --workers ${WORKERS}
 
   drf_gunicorn_gevent:
     <<: *common
     working_dir: /app_drf
     command: gunicorn drf.wsgi:application --worker-class gevent --bind 0.0.0.0:8000 --workers ${WORKERS}
 
-  ninja_uwsgi:
-    <<: *common
-    working_dir: /app_ninja
-    command: uwsgi --http 0.0.0.0:8000 --module djninja.wsgi:application --workers ${WORKERS}
-
-  ninja_uvicorn:
-    <<: *common
-    working_dir: /app_ninja
-    command: uvicorn djninja.asgi:application --host 0.0.0.0 --workers ${WORKERS}
-
   ninja_gunicorn:
     <<: *common
     working_dir: /app_ninja
-    command: gunicorn djninja.asgi:application --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --workers ${WORKERS}
+    command: gunicorn djninja.wsgi:application --bind 0.0.0.0:8000 --workers ${WORKERS}
 
   ninja_gunicorn_gevent:
     <<: *common
     working_dir: /app_ninja
     command: gunicorn djninja.wsgi:application --worker-class gevent --bind 0.0.0.0:8000 --workers ${WORKERS}
+
+  ninja_gunicorn_uvcorn:
+    <<: *common
+    working_dir: /app_ninja
+    command: gunicorn djninja.asgi:application --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --workers ${WORKERS}
+
+  ninja_uvicorn:
+    <<: *common
+    working_dir: /app_ninja
+    command: uvicorn djninja.asgi:application --host 0.0.0.0 --workers ${WORKERS}
 
   fastapi_gunicorn:
     <<: *common

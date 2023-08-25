@@ -12,7 +12,6 @@ sanic
 
 uvicorn[standard]
 gunicorn
-uWSGI
 
 aiohttp
 requests

@@ -1,9 +1,11 @@
-FROM python:3.11
+FROM pypy:3.10
 
-ENV PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=on
+# Set bash as the default shell
+ENV PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=on PATH="/root/.cargo/bin:${PATH}"
 
 # Need Rust toolchain
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 
