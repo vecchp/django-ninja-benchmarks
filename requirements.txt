@@ -1,4 +1,5 @@
 Django
+gevent
 
 django-ninja
 fastapi[standard]

@@ -20,6 +20,11 @@ services:
     working_dir: /app_drf
     command: uwsgi --http 0.0.0.0:8000 --module drf.wsgi:application --workers ${WORKERS}
 
+  drf_gunicorn_gevent:
+    <<: *common
+    working_dir: /app_drf
+    command: gunicorn drf.wsgi:application --worker-class gevent --bind 0.0.0.0:8000 --workers ${WORKERS}
+
   ninja_uwsgi:
     <<: *common
     working_dir: /app_ninja
@@ -34,6 +39,11 @@ services:
     <<: *common
     working_dir: /app_ninja
     command: gunicorn djninja.asgi:application --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --workers ${WORKERS}
+
+  ninja_gunicorn_gevent:
+    <<: *common
+    working_dir: /app_ninja
+    command: gunicorn djninja.wsgi:application --worker-class gevent --bind 0.0.0.0:8000 --workers ${WORKERS}
 
   fastapi_gunicorn:
     <<: *common

@@ -4,13 +4,15 @@ import subprocess
 import time
 
 CONCURRENT_FRAMEWORKS = [
-    'flask_marshmallow_uwsgi',
-    'drf_uwsgi',
+    # 'flask_marshmallow_uwsgi',
+    "drf_uwsgi",
+    'drf_gunicorn_gevent',
     'ninja_uwsgi',
     'ninja_gunicorn',
+    'ninja_gunicorn_gevent',
     'ninja_uvicorn',
-    'fastapi_gunicorn',
-    'fastapi_uvicorn'
+    # 'fastapi_gunicorn',
+    # 'fastapi_uvicorn'
 ]
 
 
@@ -52,7 +54,7 @@ def preheat():
     benchmark('http://127.0.0.1:8000/api/iojob', 1, 5)
 
 
-WORKERS_CASES = [1, 2, 4, 8, 16, 32, 64]
+WORKERS_CASES = [1, 2, 4, 8] # , 16, 32, 64]
 
 
 def test_concurrent(name):
