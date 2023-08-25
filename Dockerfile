@@ -1,4 +1,4 @@
-FROM pypy:3.10
+FROM python:3.11
 
 # Set bash as the default shell
 ENV PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=on PATH="/root/.cargo/bin:${PATH}"
